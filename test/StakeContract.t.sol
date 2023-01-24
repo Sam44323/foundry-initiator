@@ -14,6 +14,7 @@ contract CounterTest is Test {
         token = new TestToken("Test", "TST");
     }
 
+    // fuzz-test with amount coming from foundry
     function testStake(uint16 amount) public {
         token.approve(address(stakeContract), amount);
         bool success = stakeContract.stake(amount, address(token));
