@@ -2,23 +2,22 @@
 pragma solidity ^0.8.13;
 
 import "lib/forge-std/src/Test.sol";
+import "../src/mock/ERC20.sol";
 import "../src/StakeContract.sol";
 
 contract CounterTest is Test {
     StakeContract public stakeContract;
+    ERC20 public token;
+    uint256 public constant AMOUNT = 10e18; // 10 tokens
 
-    //     function setUp() public {
-    //         stakeContract = new StakeContract();
-    //         stakeContract.setNumber(0);
-    //     }
+    function setUp() public {
+        stakeContract = new StakeContract();
+        token = new TestToken("Test", "TST");
+    }
 
-    //     function testIncrement() public {
-    //         stakeContract.increment();
-    //         assertEq(stakeContract.number(), 1);
-    //     }
-
-    //     function testSetNumber(uint256 x) public {
-    //         stakeContract.setNumber(x);
-    //         assertEq(stakeContract.number(), x);
-    //     }
+    function testStake() public {
+        token.approve(address(stakeContract), AMOUNT);
+        bool success = stakeContract.stake(AMOUNT, address(token));
+        assertTrue(success);
+    }
 }
