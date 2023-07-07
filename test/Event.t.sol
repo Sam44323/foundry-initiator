@@ -13,7 +13,7 @@ contract EventTest is Test {
         eve = new Event();
     }
 
-    function testEmitEventTransfer() public {
+    function testEmitTransferEvent() public {
         // function expectEmit(
         //     bool checkTopic1,
         //     bool checkTopic2,
@@ -37,5 +37,27 @@ contract EventTest is Test {
 
         // NOTE: index 2 and data (amount) doesn't match but the test will still pass
         eve.transfer(address(this), address(111), 222);
+    }
+
+    function testEmitManyTransferEvent() public {
+        address[] memory to = new address[](3);
+        to[0] = address(111);
+        to[1] = address(222);
+        to[2] = address(333);
+
+        uint256[] memory amounts = new uint[](3);
+        amounts[0] = 1;
+        amounts[1] = 2;
+        amounts[2] = 3;
+
+        for (uint256 i = 0; i < to.length; i++) {
+            // 1. Tell Foundry which data to check
+            vm.expectEmit(true, true, false, true);
+            // 2. Emit the expected event
+            emit Transfer(address(this), to[i], amounts[i]);
+        }
+
+        // 3. Call the function that should emit the event
+        eve.transferMany(address(this), to, amounts);
     }
 }
