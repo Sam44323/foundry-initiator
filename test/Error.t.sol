@@ -21,7 +21,8 @@ contract ErrorTest is Test {
         err.throwError();
     }
 
-    function testFailExpectRevertCustom() public {
+    // as here we are testing for the message instead of just expecting the revert, we don't need to start with testFail...
+    function testRequireMessage() public {
         vm.expectRevert(bytes("not authorized"));
         err.throwError();
     }
