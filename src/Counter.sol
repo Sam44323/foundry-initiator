@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import "forge-std/console.sol";
+import "forge-std/console.sol"; // removing during deployment
 
 contract Counter {
     uint256 public count;
