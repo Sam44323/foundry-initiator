@@ -27,8 +27,9 @@ contract ErrorTest is Test {
         err.throwError();
     }
 
-    // function testFailExpectError() public {
-    //     vm.expectRevert(Error.NotAuthorized.selector);
-    //     err.throwCustomError();
-    // }
+    // as here we are testing for the custom error instead of just expecting the revert, we don't need to start with testFail...
+    function testCustomError() public {
+        vm.expectRevert(Error.NotAuthorized.selector);
+        err.throwCustomError();
+    }
 }
