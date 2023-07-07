@@ -32,4 +32,13 @@ contract ErrorTest is Test {
         vm.expectRevert(Error.NotAuthorized.selector);
         err.throwCustomError();
     }
+
+    // Add label to assertions
+    function testErrorLabel() public {
+        assertEq(uint256(1), uint256(1), "test 1");
+        assertEq(uint256(1), uint256(1), "test 2");
+        assertEq(uint256(1), uint256(1), "test 3");
+        assertEq(uint256(1), uint256(1), "test 4");
+        assertEq(uint256(1), uint256(1), "test 5");
+    }
 }
