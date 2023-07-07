@@ -11,7 +11,23 @@ contract ErrorTest is Test {
         err = new Error();
     }
 
-    function testFail() public {
+    function testFail() public view {
         err.throwError();
     }
+
+    // use the name testRevert when testing revert
+    function testRevert() public {
+        vm.expectRevert();
+        err.throwError();
+    }
+
+    function testFailExpectRevertCustom() public {
+        vm.expectRevert(bytes("not authorized"));
+        err.throwError();
+    }
+
+    // function testFailExpectError() public {
+    //     vm.expectRevert(Error.NotAuthorized.selector);
+    //     err.throwCustomError();
+    // }
 }
