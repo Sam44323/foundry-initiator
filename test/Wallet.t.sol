@@ -17,7 +17,7 @@ contract WalletTest is Test {
     }
 
     function _send(uint256 amount) private {
-        (bool ok, ) = address(wallet).call{value: amount}("");
+        (bool ok,) = address(wallet).call{value: amount}("");
         require(ok, "send failed");
     }
 
@@ -32,5 +32,7 @@ contract WalletTest is Test {
         assertEq(address(1).balance, 100);
 
         // testing the hoax()
+        hoax(address(1), 100);
+        _send(100);
     }
 }
