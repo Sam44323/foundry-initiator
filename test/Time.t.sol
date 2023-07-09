@@ -58,6 +58,7 @@ contract AuctionTest is Test {
     function testBlockNumber() public {
         // set block number to 11
         vm.roll(11);
-        assertEq(block.number, 11);
+        uint256 n = block.number;
+        assertEq(n, 11);
     }
 }
