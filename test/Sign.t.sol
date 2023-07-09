@@ -13,19 +13,19 @@ contract SignTest is Test {
     // vm.sign(private key, message hash)
 
     function testSignature() public {
-        uint256 pKey = 1234;
-        address pAddr = vm.addr(pKey);
+        uint256 privKey = 1234;
+        address pubAddr = vm.addr(privKey);
 
         // messageHash
         bytes32 messageHash = keccak256("secret message");
-        (uint8 v, bytes32 r, bytes32 s) = vm.sign(pKey, messageHash);
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(privKey, messageHash);
         address signer = ecrecover(messageHash, v, r, s);
-        assertEq(signer, pAddr);
+        assertEq(signer, pubAddr);
 
         // Test invalid message
         bytes32 invalidHash = keccak256("Not signed by Alice");
         signer = ecrecover(invalidHash, v, r, s);
 
-        assertTrue(signer != pAddr);
+        assertTrue(signer != pubAddr);
     }
 }
