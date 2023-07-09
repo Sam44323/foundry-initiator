@@ -17,7 +17,7 @@ contract WalletTest is Test {
     }
 
     function _send(uint256 amount) private {
-        (bool ok, ) = address(wallet).call{value: amount}("");
+        (bool ok,) = address(wallet).call{value: amount}("");
         require(ok, "send failed");
     }
 
