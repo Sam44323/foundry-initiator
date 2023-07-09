@@ -9,15 +9,28 @@ contract WalletTest is Test {
     Wallet public wallet;
 
     // NOTES
-    // deal(address, uint) - Set balance of address
+    // deal(address, uint) - Set ETH balance of address
     // hoax(address, uint) - deal + prank, Sets up a prank and set balance
 
     function setUp() public {
         wallet = new Wallet();
     }
 
-    function _send(uint amount) private {
+    function _send(uint256 amount) private {
         (bool ok, ) = address(wallet).call{value: amount}("");
         require(ok, "send failed");
+    }
+
+    function testEthBalance() public view {
+        console.log("ETH-Balance", address(this).balance / 1e18);
+    }
+
+    function testSendEth() public {
+        // testing the deal()
+
+        deal(address(1), 100);
+        assertEq(address(1).balance, 100);
+
+        // testing the hoax()
     }
 }
