@@ -17,7 +17,7 @@ contract WalletTest is Test {
     }
 
     function _send(uint256 amount) private {
-        (bool ok,) = address(wallet).call{value: amount}("");
+        (bool ok, ) = address(wallet).call{value: amount}("");
         require(ok, "send failed");
     }
 
@@ -26,7 +26,7 @@ contract WalletTest is Test {
     }
 
     function testSendEth() public {
-        // testing the deal()
+        // testing the deal() - deal doesn't added new balance to the previous balance it overwrites it and set the new-balance
 
         deal(address(1), 100);
         assertEq(address(1).balance, 100);
