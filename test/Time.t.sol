@@ -29,6 +29,13 @@ contract AuctionTest is Test {
         auction.bid();
     }
 
+    function testEnd() public {
+        vm.warp(startAt + 1 days);
+        auction.bid();
+        vm.warp(startAt + 2 days);
+        auction.end();
+    }
+
     function testBidFailsAfterEndTime() public {
         vm.expectRevert(bytes("cannot bid"));
         vm.warp(startAt + 2 days);
