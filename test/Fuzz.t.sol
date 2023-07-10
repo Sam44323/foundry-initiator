@@ -13,7 +13,7 @@ import "../src/Bit.sol";
 //   ~ - median gas used
 
 contract FuzzTest is Test {
-    Bit public bit;
+    Bit public b;
 
     function setUp() public {
         b = new Bit();
